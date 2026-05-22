@@ -41,49 +41,50 @@ customer_data = {
 }
 print(f"Processing Order for: {customer_data['name']} [{customer_data['tier']} Tier Member]...")
 
-
 total_after_discounts = 0
-# Loop 
+
+# Loop through each product in the product list
 for product_id, product_info in product_list.items():
     product_name = product_info["name"]         
     category = product_info["category"]        
     unit_price = product_info["price"]          
     quantity = product_info["quantity"]         
     
-    # subtotal 
+    # calculate subtotal (price times quantity)
     subtotal = unit_price * quantity
     
-    #match-case 
+    # figure out discount based on category using match-case
     match category:
-        case "Appliance":                       # 20% discount on Appliances
+        case "Appliance":
             discount_percent = 0.20
-        case "Clothing":                        # 10% discount on Clothing
+        case "Clothing":
             discount_percent = 0.10
-        case _:                                 # No discount for other categories
+        case _:
             discount_percent = 0.00
     
-    #  sales discount 
+    # calculate how much money they save
     sales_discount = subtotal * discount_percent
     
-    # final product price 
+    # price after the product discount
     final_product_price = subtotal - sales_discount
     
-    # Add current product's final price to running total
-    total_after_discounts += final_product_price
+    # add to the running total for later
+    total_after_discounts = total_after_discounts + final_product_price
     
+    # print info for this product
     print(f"\nProduct: {product_name}")
     print(f"  Subtotal: ${subtotal:.2f}")
     print(f"  Discount: ${sales_discount:.2f} ({discount_percent * 100}% off)")
     print(f"  Final Price: ${final_product_price:.2f}")
 
-# Task 4
-# total after all product discounts
+# Task 4 starts here
+# show total after all product discounts
 print(f"\nTotal after product discounts: ${total_after_discounts:.2f}")
 
-#
+# get customer's membership tier from the dictionary we made earlier
 member_tier = customer_data["tier"]            
 
-# membership discount percentage based on tier
+# decide what percent discount they get based on their tier
 if member_tier == "Platinum":                  
     member_discount_percent = 0.16
 elif member_tier == "Gold":                     
@@ -93,14 +94,13 @@ elif member_tier == "Silver":
 else:                                          
     member_discount_percent = 0.00
 
-# membership discount amount
+# calculate how much the membership saves them
 member_discount_amount = total_after_discounts * member_discount_percent
 
-# final total owed by customer
+# apply membership discount to get final amount due
 final_total_owed = total_after_discounts - member_discount_amount
 
-
-#membership discount amount and final total owed
+# print the membership discount and final bill
 print(f"Membership discount ({member_tier} tier, {member_discount_percent * 100}%): ${member_discount_amount:.2f}")
 print(f"Final Total Owed by customer: ${final_total_owed:.2f}")
 
