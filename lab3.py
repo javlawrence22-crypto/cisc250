@@ -53,7 +53,7 @@ for product_id, product_info in product_list.items():
     # calculate subtotal (price times quantity)
     subtotal = unit_price * quantity
     
-    # figure out discount based on category using match-case
+    # the match case
     match category:
         case "Appliance":
             discount_percent = 0.20
@@ -77,7 +77,7 @@ for product_id, product_info in product_list.items():
     print(f"  Discount: ${sales_discount:.2f} ({discount_percent * 100}% off)")
     print(f"  Final Price: ${final_product_price:.2f}")
 
-# Task 4 starts here
+# Task 4 
 # show total after all product discounts
 print(f"\nTotal after product discounts: ${total_after_discounts:.2f}")
 
@@ -97,10 +97,10 @@ else:
 # calculate how much the membership saves them
 member_discount_amount = total_after_discounts * member_discount_percent
 
-# apply membership discount to get final amount due
+#membership discount to get final amount due
 final_total_owed = total_after_discounts - member_discount_amount
 
-# print the membership discount and final bill
+#the membership discount and final bill
 print(f"Membership discount ({member_tier} tier, {member_discount_percent * 100}%): ${member_discount_amount:.2f}")
 print(f"Final Total Owed by customer: ${final_total_owed:.2f}")
 
